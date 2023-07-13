@@ -8,5 +8,8 @@ target 'PhotoDemo' do
   #自动布局
   pod 'Masonry'
   
+  #第三方相册查看选择器
+  pod 'TZImagePickerController'
+  
 end
 
