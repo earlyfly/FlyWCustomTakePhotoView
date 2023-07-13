@@ -188,7 +188,10 @@
             [UIView animateWithDuration:0.3 animations:^{
                 self.focusView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
             } completion:^(BOOL finished) {
-                [self hiddenFocusAnimation];
+                
+                [UIView animateWithDuration:0.5 delay:3 options:0 animations:^{
+                    self.focusView.alpha = 0;
+                } completion:nil];
             }];
         }];
     }
@@ -297,17 +300,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
-
-// 隐藏聚焦视图
-- (void)hiddenFocusAnimation{
-    [UIView beginAnimations:nil context:UIGraphicsGetCurrentContext()];
-    [UIView setAnimationDelay:3];
-    self.focusView.alpha = 0;
-    [UIView setAnimationDuration:0.5f];//动画时间
-    [UIView commitAnimations];
-    
-}
-
 
 #pragma mark - Setter & Getter
 // 上方功能区

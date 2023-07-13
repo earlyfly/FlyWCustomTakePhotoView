@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "DDPhotoViewController.h"
 #import "GZPhotoCameraVC.h"
+#import "GZIDCardTakePhotoVC.h"
 
 @interface ViewController ()
 
@@ -52,15 +53,21 @@
     UIAlertAction *photoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         // 来自PhotoView第三方：https://gitee.com/dumdum/PhotoDemo
-        // 使用的是老的api实现，且存在裁减误差。不建议使用
+        // 使用的是老的api实现，且存在裁减误差。不建议使用【❌❌❌过渡版本❌❌❌】
 //        DDPhotoViewController *vc = [[DDPhotoViewController alloc] init];
 //        vc.imageblock = ^(UIImage *image) {
 //            self.imgView.image = image;
 //        };
         
-        // 根据PhotoView灵感修改调整而来，能正确裁减，无废弃api的警告
-        GZPhotoCameraVC *vc = [[GZPhotoCameraVC alloc] init];
-        vc.imageblock = ^(UIImage *image) {
+//        // 根据PhotoView灵感修改调整而来，能正确裁减，无废弃api的警告【⚠️⚠️⚠️过渡版本⚠️⚠️⚠️】
+//        GZPhotoCameraVC *vc = [[GZPhotoCameraVC alloc] init];
+//        vc.imageblock = ^(UIImage *image) {
+//            self.imgView.image = image;
+//        };
+        
+        // 根据PhotoView灵感修改调整而来，能正确裁减，无废弃api的警告【✅✅✅最终版本✅✅✅】
+        GZIDCardTakePhotoVC *vc = [[GZIDCardTakePhotoVC alloc] init];
+        vc.photoCallback = ^(UIImage *image) {
             self.imgView.image = image;
         };
         
