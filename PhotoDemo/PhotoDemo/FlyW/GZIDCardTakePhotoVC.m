@@ -331,7 +331,8 @@
     
     [self.view addSubview:self.clipAreaImgView];
     [self.clipAreaImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(self.areaImage.size);
+        make.width.equalTo(self.view).multipliedBy(240.0/375.0);
+        make.height.equalTo(self.clipAreaImgView.mas_width).multipliedBy(self.areaImage.size.height/self.areaImage.size.width);
         make.center.equalTo(self.view);
     }];
     
@@ -392,8 +393,8 @@
     CGFloat targetH = height * screenScale;
 
     // 缩放后要裁减的区域
-    CGFloat areaW = self.areaImage.size.width * screenScale;
-    CGFloat areaH = self.areaImage.size.height * screenScale;
+    CGFloat areaW = self.clipAreaImgView.frame.size.width * screenScale;
+    CGFloat areaH = self.clipAreaImgView.frame.size.height * screenScale;
 
     // 缩放图片
     image = [UIImage image:image scaleToSize:CGSizeMake(targetW, targetH)];
