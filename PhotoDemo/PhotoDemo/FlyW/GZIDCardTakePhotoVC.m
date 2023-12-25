@@ -347,6 +347,24 @@
     tapGesture.delegate = self;
     [self.view addGestureRecognizer:tapGesture];
     
+    // 最里层镂空
+    [self.view setNeedsLayout];
+    [self.view layoutIfNeeded];
+    UIBezierPath *transparentRoundedRectPath = [UIBezierPath bezierPathWithRoundedRect:self.clipAreaImgView.frame cornerRadius:6];
+    
+    // 最外层背景
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.previewLayer.frame];
+    [path appendPath:transparentRoundedRectPath];
+    [path setUsesEvenOddFillRule:YES];
+    
+    CAShapeLayer *fillLayer = [CAShapeLayer layer];
+    fillLayer.path = path.CGPath;
+    fillLayer.fillRule = kCAFillRuleEvenOdd;
+    fillLayer.fillColor = [UIColor blackColor].CGColor;
+    fillLayer.opacity = 0.6;
+    
+    [self.previewLayer addSublayer:fillLayer];
+    
 }
 // 自定义相机
 - (void)customCamera{
